@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Panel layout="BorderLayout">
+	<ToolbarView constraints="BorderLayout.NORTH"/>
+		<SplitPane id="tabSplitPane" resizeWeight="0.65" orientation="JSplitPane.HORIZONTAL_SPLIT" constraints="BorderLayout.CENTER">
+			<SlideView id="slideView" />
+
+			<VBox id="rightVbox">
+				<AdaptiveTabbedPane id="rightTabPane" tabPlacement="JTabbedPane.RIGHT" defaultTabType="AdaptiveTabType.SLIDE" focusTraversable="false" />
+			</VBox>
+		</SplitPane>
+</Panel>

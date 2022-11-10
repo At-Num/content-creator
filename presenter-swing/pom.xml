@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<project
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+        xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>atnum.static</groupId>
+        <artifactId>atnum-static</artifactId>
+        <version>4.0.0</version>
+    </parent>
+
+    <groupId>atnum.static.presenter.swing</groupId>
+    <artifactId>presenter-swing</artifactId>
+    <version>4.0.0</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <classifier>${envClassifier}</classifier><!--  works with profile for native dependencies  -->
+                    <archive>
+                        <manifest>
+                            <mainClass>atnum.content.presenter.swing.PresenterApplication</mainClass>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <classpathLayoutType>custom</classpathLayoutType>
+                            <customClasspathLayout>${artifact.artifactId}.${artifact.extension}</customClasspathLayout>
+                        </manifest>
+                        <manifestEntries>
+                            <!--  needs to be set for profile ie webrtc-java-windows-x86_64  -->
+                            <Class-Path>lib/webrtc-java-linux-x86_64.jar  lib/stylus-linux-x86_64.jar</Class-Path>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <configuration>
+                    <tasks>
+                        <copy  todir="../target/linux-x86_64/lib/native"  flatten="false">
+                            <fileset dir="../app_native_res/lib_min/linux" includes="*" />
+                        </copy>
+                    </tasks>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>api</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <targetPath>resources</targetPath>
+                <filtering>false</filtering>
+                <excludes>
+                    <exclude>log.properties</exclude>
+                    <exclude>log4j2.xml</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>log.properties</include>
+                    <include>log4j2.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>atnum.static.core</groupId>
+            <artifactId>core</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>atnum.static.presenter.api</groupId>
+            <artifactId>presenter-api</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>atnum.static.swing</groupId>
+            <artifactId>swing</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.lecturestudio.stylus</groupId>
+            <artifactId>stylus-awt</artifactId>
+            <version>${stylus.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>atnum.static.screen</groupId>
+            <artifactId>screen-recorder</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+</project>

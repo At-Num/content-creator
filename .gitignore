@@ -1,0 +1,13 @@
+# IntelliJ IDEA
+**/*.iml
+**/.idea
+
+# VS Code
+.vscode
+
+# Maven Build
+**/target
+info.txt
+MANIFEST2.MF
+integration
+

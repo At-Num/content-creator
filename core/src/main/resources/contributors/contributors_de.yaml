@@ -1,0 +1,27 @@
+- name: Alex Andres
+  contributions:
+    - Entwickler
+  firm:
+    "Technische Universit\u00e4t Darmstadt\n
+
+    Fachgebiet Echtzeitsysteme"
+- name: Andreas Koch
+  contributions:
+    - Konzept
+    - Feldtest
+  firm:
+    "Technische Universit\u00e4t Darmstadt\n
+
+    Fachbereich Informatik\n
+
+    Fachgebiet Eingebettete Systeme und ihre Anwendungen"
+- name: Andy Schürr
+  contributions:
+    - Konzept
+    - Feldtest
+  firm:
+    "Technische Universit\u00e4t Darmstadt\n
+
+    Fachbereich Elektrotechnik und Informationstechnik\n
+
+    Fachgebiet Echtzeitsysteme"

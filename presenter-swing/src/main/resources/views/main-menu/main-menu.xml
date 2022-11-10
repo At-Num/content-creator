@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menubar>
+	<menu id="fileMenu" text="menu.file">
+		<menuitem id="openDocumentMenuItem" text="menu.open" accelerator="ctrl O" />
+		<menuitem id="closeDocumentMenuItem" text="menu.close" accelerator="ctrl F4" enabled="false" />
+		<separator />
+		<menuitem id="saveDocumentsMenuItem" text="menu.save.documents" enabled="false" />
+		<separator />
+		<menuitem id="exitMenuItem" text="menu.exit" accelerator="ctrl Q" />
+	</menu>
+	<menu text="menu.edit">
+		<menuitem id="undoMenuItem" text="menu.undo" accelerator="ctrl Z" enabled="false" />
+		<menuitem id="redoMenuItem" text="menu.redo" accelerator="ctrl Y" enabled="false" />
+		<separator />
+		<menuitem id="settingsMenuItem" text="menu.options" />
+	</menu>
+	<menu text="menu.view">
+		<checkboxmenuitem id="fullscreenMenuItem" text="menu.fullscreen" type="checkbox" accelerator="alt ENTER" />
+		<menuitem id="customizeToolbarMenuItem" text="menu.toolbar.customize" />
+
+	</menu>
+	<menu text="menu.whiteboard">
+		<menuitem id="newWhiteboardMenuItem" text="menu.whiteboard.new" />
+		<separator />
+		<menuitem id="newWhiteboardPageMenuItem" text="menu.slide.new" accelerator="F9" enabled="false" />
+		<menuitem id="deleteWhiteboardPageMenuItem" text="menu.slide.delete" accelerator="ctrl D" enabled="false" />
+		<separator />
+		<checkboxmenuitem id="gridMenuItem" text="menu.grid" accelerator="Q" enabled="false" />
+	</menu>
+
+	<menu text="menu.info">
+		<menuitem id="logMenuItem" text="menu.log" />
+		<menuitem id="aboutMenuItem" text="menu.about" />
+	</menu>
+	<box.hglue />
+	<menu id="timeMenu" icon="clock-indicator.svg, 20" disabledicon="clock-indicator.svg, 20" enabled="false" />
+
+</menubar>

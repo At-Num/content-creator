@@ -1,0 +1,27 @@
+- name: Alex Andres
+  contributions:
+    - Developer
+  firm:
+    "Technical University of Darmstadt\n
+
+    Real-Time Systems Lab"
+- name: Andreas Koch
+  contributions:
+    - Initial Concept
+    - Field Testing
+  firm:
+    "Technical University of Darmstadt\n
+
+    Department of Computer Science\n
+
+    Embedded Systems and Applications Group"
+- name: Andy Schürr
+  contributions:
+    - Concept
+    - Field Testing
+  firm:
+    "Technical University of Darmstadt\n
+
+    Department of Electrical Engineering and Information Technology\n
+
+    Real-Time Systems Lab"

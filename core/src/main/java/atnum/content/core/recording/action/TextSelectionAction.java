@@ -1,0 +1,111 @@
+/*
+ * Copyright (C) 2020 TU Darmstadt, Department of Computer Science,
+ * Embedded Systems and Applications Group.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+package atnum.content.core.recording.action;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.List;
+
+import atnum.content.core.controller.ToolController;
+import atnum.content.core.geometry.Rectangle2D;
+import atnum.content.core.graphics.Color;
+import atnum.content.core.tool.TextSelectionSettings;
+import atnum.content.core.tool.TextSelectionTool;
+import atnum.content.core.tool.ToolType;
+
+public class TextSelectionAction extends PlaybackAction {
+
+	private final List<Rectangle2D> selection = new ArrayList<>();
+
+	private Color color;
+
+
+	public TextSelectionAction(Color color) {
+		super();
+
+		this.color = color;
+	}
+
+	public TextSelectionAction(byte[] input) throws IOException {
+		parseFrom(input);
+	}
+
+	public boolean addSelection(Rectangle2D rect) {
+		for (Rectangle2D r : selection) {
+			if (r.equals(rect)) {
+				return false;
+			}
+		}
+
+		this.selection.add(rect);
+
+		return true;
+	}
+
+	@Override
+	public void execute(ToolController controller) throws Exception {
+		TextSelectionSettings settings = controller.getPaintSettings(ToolType.TEXT_SELECTION);
+		settings.setColor(color);
+
+		controller.setTool(new TextSelectionTool(controller, selection, null));
+		controller.setKeyEvent(getKeyEvent());
+	}
+
+	@Override
+	public byte[] toByteArray() throws IOException {
+		int length = 8 + selection.size() * 32;
+
+		ByteBuffer buffer = createBuffer(length);
+
+		buffer.putInt(color.getRGBA());
+		buffer.putInt(selection.size());
+
+		if (!selection.isEmpty()) {
+			for (Rectangle2D rect : selection) {
+				buffer.putDouble(rect.getX());
+				buffer.putDouble(rect.getY());
+				buffer.putDouble(rect.getWidth());
+				buffer.putDouble(rect.getHeight());
+			}
+		}
+
+		return buffer.array();
+	}
+
+	@Override
+	public void parseFrom(byte[] input) throws IOException {
+		ByteBuffer buffer = createBuffer(input);
+
+		color = new Color(buffer.getInt());
+
+		int count = buffer.getInt();
+
+		for (int i = 0; i < count; i++) {
+			selection.add(new Rectangle2D(buffer.getDouble(), buffer.getDouble(),
+										  buffer.getDouble(), buffer.getDouble()));
+		}
+	}
+
+	@Override
+	public ActionType getType() {
+		return ActionType.TEXT_SELECTION;
+	}
+
+}

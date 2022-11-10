@@ -1,0 +1,147 @@
+/*
+ * Copyright (C) 2020 TU Darmstadt, Department of Computer Science,
+ * Embedded Systems and Applications Group.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+package atnum.content.core.controller;
+
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import atnum.content.core.app.ApplicationContext;
+import atnum.content.core.app.configuration.WhiteboardConfiguration;
+import atnum.content.core.geometry.Dimension2D;
+import atnum.content.core.geometry.Rectangle2D;
+import atnum.content.core.graphics.GraphicsContext;
+import atnum.content.core.model.Page;
+import atnum.content.core.model.shape.GridShape;
+import atnum.content.core.model.shape.Shape;
+import atnum.content.core.render.RenderContext;
+import atnum.content.core.swing.SwingGraphicsContext;
+import atnum.content.core.view.PresentationParameter;
+import atnum.content.core.view.PresentationParameterProvider;
+import atnum.content.core.view.ViewType;
+
+/**
+ * The controller to handle page render requests.
+ *
+ * @author Alex Andres
+ */
+public class RenderController extends Controller {
+
+	private static final Logger LOG = LogManager.getLogger(RenderController.class);
+
+	/** The render context. */
+	private final RenderContext renderContext;
+
+
+	/**
+	 * Create a {@link RenderController} with the specified contexts.
+	 *
+	 * @param context       The application context.
+	 * @param renderContext The render context.
+	 */
+	public RenderController(ApplicationContext context, RenderContext renderContext) {
+		super(context);
+
+		this.renderContext = renderContext;
+	}
+
+	/**
+	 * Copy constructor to create a {@link RenderController} with a different {@link ApplicationContext}.
+	 *
+	 * @param context    The new application context.
+	 * @param controller The render controller to copy, except the application context.
+	 */
+	public RenderController(ApplicationContext context, RenderController controller) {
+		super(context);
+
+		this.renderContext = controller.renderContext;
+	}
+
+	/**
+	 * Render the foreground, all annotations, of a page.
+	 */
+	public void renderShapes(GraphicsContext gc, ViewType viewType, Dimension2D imageSize, Page page, List<Shape> shapes) {
+		try {
+			final PresentationParameterProvider ppProvider = getContext().getPagePropertyProvider(viewType);
+			final PresentationParameter parameter = ppProvider.getParameter(page);
+
+			Rectangle2D pageRect = parameter.getViewRect();
+
+			double sx = imageSize.getWidth() / pageRect.getWidth();
+
+			gc.save();
+			gc.scale(sx, sx);
+			gc.translate(-pageRect.getX(), -pageRect.getY());
+
+			renderContext.render(viewType, shapes, gc);
+
+			gc.restore();
+		}
+		catch (Exception e) {
+			LOG.error("Rendering failed", e);
+		}
+	}
+
+	/**
+	 * Render a page on a surface the specified render task contains.
+	 */
+	public void renderPage(BufferedImage image, Page page, ViewType viewType) {
+		try {
+			final PresentationParameterProvider ppProvider = getContext().getPagePropertyProvider(viewType);
+			final PresentationParameter parameter = ppProvider.getParameter(page);
+
+			page.getDocument().getDocumentRenderer().render(page, parameter, image);
+
+			if (page.getDocument().isWhiteboard()) {
+				renderGrid(image, parameter, viewType);
+			}
+		}
+		catch (Exception e) {
+			LOG.error("Rendering failed", e);
+		}
+	}
+
+	private void renderGrid(BufferedImage image, PresentationParameter parameter, ViewType viewType) throws Exception {
+		if (parameter.showGrid()) {
+			Rectangle2D pageRect = parameter.getViewRect();
+			WhiteboardConfiguration wbConfig = parameter.getWhiteboardConfig();
+
+			GridShape gridShape = new GridShape();
+			gridShape.setViewRatio(new Dimension2D(4.0, 3.0));
+			gridShape.setColor(wbConfig.getGridColor());
+			gridShape.setHorizontalLinesInterval(wbConfig.getHorizontalLinesInterval());
+			gridShape.setHorizontalLinesVisible(wbConfig.getHorizontalLinesVisible());
+			gridShape.setVerticalLinesInterval(wbConfig.getVerticalLinesInterval());
+			gridShape.setVerticalLinesVisible(wbConfig.getVerticalLinesVisible());
+
+			double sx = image.getWidth() / pageRect.getWidth();
+
+			Graphics2D g = image.createGraphics();
+			g.scale(sx, sx);
+			g.translate(-pageRect.getX(), -pageRect.getY());
+
+			renderContext.render(viewType, List.of(gridShape), new SwingGraphicsContext(g));
+
+			g.dispose();
+		}
+	}
+}

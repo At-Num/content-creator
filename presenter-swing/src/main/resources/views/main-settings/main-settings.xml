@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TabbedPane name="settings" tabPlacement="JTabbedPane.LEFT">
+	<Tab name="general" text="settings.general" icon="general-settings.svg, 24" size="120, 30">
+		<GeneralSettingsView />
+	</Tab>
+	<Tab name="displays" text="settings.displays" icon="display-settings.svg, 24" size="120, 30">
+		<DisplaySettingsView />
+	</Tab>
+	<Tab name="tools" text="settings.tools" icon="tool-settings.svg, 24" size="120, 30">
+		<ToolSettingsView />
+	</Tab>
+	<Tab name="whiteboard" text="settings.whiteboard" icon="whiteboard-settings.svg, 24" size="120, 30">
+		<WhiteboardSettingsView />
+	</Tab>
+	<Tab name="sound" text="settings.sound" icon="sound-settings.svg, 24" size="120, 30">
+		<SoundSettingsView />
+	</Tab>
+</TabbedPane>

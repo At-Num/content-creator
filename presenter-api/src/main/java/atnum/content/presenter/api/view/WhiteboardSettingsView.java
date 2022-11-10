@@ -1,0 +1,46 @@
+/*
+ * Copyright (C) 2022 TU Darmstadt, Department of Computer Science,
+ * Embedded Systems and Applications Group.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+package atnum.content.presenter.api.view;
+
+import atnum.content.core.beans.BooleanProperty;
+import atnum.content.core.beans.DoubleProperty;
+import atnum.content.core.beans.ObjectProperty;
+import atnum.content.core.graphics.Color;
+import atnum.content.core.model.Page;
+import atnum.content.core.view.PresentationParameter;
+
+public interface WhiteboardSettingsView extends SettingsBaseView {
+
+	void setBackgroundColor(ObjectProperty<Color> color);
+
+	void setGridColor(ObjectProperty<Color> color);
+
+	void setGridInterval(DoubleProperty interval);
+
+	void setShowGridAutomatically(BooleanProperty show);
+
+	void setShowGridOnDisplays(BooleanProperty show);
+
+	void setShowVerticalGridLines(BooleanProperty show);
+
+	void setShowHorizontalGridLines(BooleanProperty show);
+
+	void setWhiteboardPage(Page page, PresentationParameter parameter);
+
+}
