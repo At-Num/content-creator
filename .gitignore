@@ -1,12 +1,16 @@
 # IntelliJ IDEA
 **/*.iml
 **/.idea
-
+**/*.log
 # VS Code
 .vscode
 
 # Maven Build
 **/target
+**/build
+**/deploy
+**/jdk
+
 info.txt
 MANIFEST2.MF
 integration

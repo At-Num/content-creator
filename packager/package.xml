@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project  basedir=".">
+
+    <target name="bundleZip"   description="generate the distribution" >
+
+        <echo>${stageSource}</echo>
+        <echo>${stage}</echo>
+        <echo>${deploy}</echo>
+        <delete dir="${stage}"/>
+        <mkdir dir="${stage}"/>
+        <delete dir="${deploy}"/>
+        <mkdir dir="${deploy}"/>
+        <copy todir="${stage}" flatten="false">
+            <fileset dir="${stageSource}" includes="**/*.*"/>
+        </copy>
+        <copy todir="${stage}/jdk" flatten="false">
+            <fileset dir="jdk" includes="**/*.*"/>
+        </copy>
+        <copy file="run.bat"  tofile="${stage}/run.bat"  ></copy>
+        <copy file="install.bat"  tofile="${stage}/install.bat"  ></copy>
+        <copy file="icon.ico"  tofile="${stage}/icon.ico"  ></copy>
+        <!-- Put everything in ${deploy} into the  ziped bundle file -->
+        <zip destfile="${deploy}/deploy_packaged.zip" >
+            <zipfileset dir="${stage}" />
+        </zip>
+
+
+
+    </target>
+
+</project>
