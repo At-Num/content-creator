@@ -11,3 +11,9 @@ info.txt
 MANIFEST2.MF
 integration
 
+
+# package
+**/build
+**/deploy
+**/jdk
+

@@ -62,7 +62,7 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>api</id>
+                        <id>preswing</id>
                         <phase>install</phase>
                         <goals>
                             <goal>run</goal>
