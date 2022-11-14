@@ -10,9 +10,6 @@
         <mkdir dir="${stage}"/>
         <delete dir="${deploy}"/>
         <mkdir dir="${deploy}"/>
-        <copy todir="${stage}" flatten="false">
-            <fileset dir="${stageSource}" includes="**/*.*"/>
-        </copy>
         <copy todir="${stage}/jdk" flatten="false">
             <fileset dir="jdk" includes="**/*"/>
         </copy>
@@ -20,11 +17,9 @@
         <copy file="install.bat"  tofile="${stage}/install.bat"  ></copy>
         <copy file="icon.ico"  tofile="${stage}/icon.ico"  ></copy>
         <!-- Put everything in ${deploy} into the  ziped bundle file -->
-        <zip destfile="${deploy}/deploy_packaged.zip" >
+        <zip destfile="${deploy}/content-creator.zip" >
             <zipfileset dir="${stage}" />
         </zip>
-
-
 
     </target>
 
