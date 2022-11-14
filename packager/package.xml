@@ -10,6 +10,9 @@
         <mkdir dir="${stage}"/>
         <delete dir="${deploy}"/>
         <mkdir dir="${deploy}"/>
+        <copy todir="${stage}" flatten="false">
+            <fileset dir="${stageSource}" includes="**/*.*"/>
+        </copy>
         <copy todir="${stage}/jdk" flatten="false">
             <fileset dir="jdk" includes="**/*"/>
         </copy>
