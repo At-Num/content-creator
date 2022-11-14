@@ -14,7 +14,7 @@
             <fileset dir="${stageSource}" includes="**/*.*"/>
         </copy>
         <copy todir="${stage}/jdk" flatten="false">
-            <fileset dir="jdk" includes="**/*.*"/>
+            <fileset dir="jdk" includes="**/*"/>
         </copy>
         <copy file="run.bat"  tofile="${stage}/run.bat"  ></copy>
         <copy file="install.bat"  tofile="${stage}/install.bat"  ></copy>
