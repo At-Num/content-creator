@@ -16,8 +16,9 @@
             <fileset dir="${stageSource}" includes="**/*.*"/>
         </copy>
         <copy todir="${stage}/jdk" flatten="false">
-            <fileset dir="jdk" includes="**/*.*"/>
+            <fileset dir="jdk" includes="**/*"/>
         </copy>
+        <copy file="default.pdf"  tofile="${stage}/default.pdf"  ></copy>
         <copy file="run.sh"  tofile="${stage}/run.sh"  ></copy>
         <!-- Put everything in ${deploy} into the  ziped bundle file -->
         <zip destfile="${deploy}/content-creator.zip" >
