@@ -20,6 +20,7 @@
         <copy file="install.bat"  tofile="${stage}/install.bat"  ></copy>
         <copy file="icon.ico"  tofile="${stage}/icon.ico"  ></copy>
         <copy file="default.pdf"  tofile="${stage}/default.pdf"  ></copy>
+        <copy file="InstallWindows10.pdf"  tofile="${stage}/InstallWindows10.pdf"  ></copy>
         <!-- Put everything in ${deploy} into the  ziped bundle file -->
         <zip destfile="${deploy}/content-creator.zip" >
             <zipfileset dir="${stage}" />

@@ -158,7 +158,7 @@ public abstract class SwingApplication extends ApplicationBase implements Graphi
 			Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 			var wCAdjust= dim.width/2-window.getSize().width/2;
 			wCAdjust = (int) (wCAdjust - wCAdjust*centerAdjust);
-			var hCAdjust= dim.width/2-window.getSize().width/2;
+			var hCAdjust= dim.height/2-window.getSize().height/2;
 			hCAdjust = (int) (hCAdjust - hCAdjust*centerAdjust);
 			window.setLocation(wCAdjust, hCAdjust);
 			window.setVisible(true);
