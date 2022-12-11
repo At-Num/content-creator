@@ -12,7 +12,7 @@
 	<Tab name="whiteboard" text="settings.whiteboard" icon="whiteboard-settings.svg, 24" size="120, 30">
 		<WhiteboardSettingsView />
 	</Tab>
-	<Tab name="sound" text="settings.sound" icon="sound-settings.svg, 24" size="120, 30">
-		<SoundSettingsView />
-	</Tab>
+<!--	<Tab name="sound" text="settings.sound" icon="sound-settings.svg, 24" size="120, 30">-->
+<!--		<SoundSettingsView />-->
+<!--	</Tab>-->
 </TabbedPane>

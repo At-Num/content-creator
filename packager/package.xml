@@ -19,6 +19,7 @@
             <fileset dir="jdk" includes="**/*"/>
         </copy>
         <copy file="default.pdf"  tofile="${stage}/default.pdf"  ></copy>
+        <copy file="InstallLinuxUbuntu.pdf"  tofile="${stage}/InstallLinuxUbuntu.pdf"  ></copy>
         <copy file="run.sh"  tofile="${stage}/run.sh"  ></copy>
         <!-- Put everything in ${deploy} into the  ziped bundle file -->
         <zip destfile="${deploy}/content-creator.zip" >
