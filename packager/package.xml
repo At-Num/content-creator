@@ -3,6 +3,7 @@
 
     <target name="bundleZip"   description="generate the distribution" >
 
+
         <echo>${stageSource}</echo>
         <echo>${stage}</echo>
         <echo>${deploy}</echo>
