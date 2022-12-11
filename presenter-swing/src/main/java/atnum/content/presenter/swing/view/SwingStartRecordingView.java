@@ -85,63 +85,63 @@ public class SwingStartRecordingView extends JPanel implements StartRecordingVie
 
 	@Override
 	public void setAudioPlaybackDevice(StringProperty playbackDeviceName) {
-		SwingUtils.invoke(() -> {
-			SwingUtils.bindBidirectional(audioPlaybackDevicesCombo, playbackDeviceName);
-		});
+//		SwingUtils.invoke(() -> {
+//			SwingUtils.bindBidirectional(audioPlaybackDevicesCombo, playbackDeviceName);
+//		});
 	}
 
 	@Override
 	public void setAudioPlaybackDevices(AudioDevice[] playbackDevices) {
-		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+//		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+//
+//		for (AudioDevice device : playbackDevices) {
+//			model.addElement(device.getName());
+//		}
 
-		for (AudioDevice device : playbackDevices) {
-			model.addElement(device.getName());
-		}
-
-		SwingUtils.invoke(() -> {
-			audioPlaybackDevicesCombo.setLightWeightPopupEnabled(false);
-			audioPlaybackDevicesCombo.setModel(model);
-		});
+//		SwingUtils.invoke(() -> {
+//			audioPlaybackDevicesCombo.setLightWeightPopupEnabled(false);
+//			audioPlaybackDevicesCombo.setModel(model);
+//		});
 	}
 
 	@Override
 	public void setAudioTestCaptureEnabled(BooleanProperty enable) {
-		boolean enabled = enable.get();
-
-		if (!enabled) {
-			SwingUtils.invoke(() -> {
-				testCaptureButton.setSelected(false);
-				testCaptureButton.setEnabled(false);
-			});
-		}
-
-		enable.addListener((observable, oldValue, newValue) ->
-				testCaptureButton.setEnabled(newValue));
+//		boolean enabled = enable.get();
+//
+//		if (!enabled) {
+//			SwingUtils.invoke(() -> {
+//				testCaptureButton.setSelected(false);
+//				testCaptureButton.setEnabled(false);
+//			});
+//		}
+//
+//		enable.addListener((observable, oldValue, newValue) ->
+//				testCaptureButton.setEnabled(newValue));
 	}
 
 	@Override
 	public void setAudioTestPlaybackEnabled(BooleanProperty enable) {
-		boolean enabled = enable.get();
-
-		if (!enabled) {
-			SwingUtils.invoke(() -> {
-				playCaptureButton.setSelected(false);
-				playCaptureButton.setEnabled(false);
-			});
-		}
-
-		enable.addListener((observable, oldValue, newValue) ->
-				playCaptureButton.setEnabled(newValue));
+//		boolean enabled = enable.get();
+//
+//		if (!enabled) {
+//			SwingUtils.invoke(() -> {
+//				playCaptureButton.setSelected(false);
+//				playCaptureButton.setEnabled(false);
+//			});
+//		}
+//
+//		enable.addListener((observable, oldValue, newValue) ->
+//				playCaptureButton.setEnabled(newValue));
 	}
 
 	@Override
 	public void setOnAudioTestCapture(BooleanProperty recordProperty) {
-		SwingUtils.bindBidirectional(testCaptureButton, recordProperty);
+//		SwingUtils.bindBidirectional(testCaptureButton, recordProperty);
 	}
 
 	@Override
 	public void setOnAudioTestCapturePlayback(BooleanProperty playProperty) {
-		SwingUtils.bindBidirectional(playCaptureButton, playProperty);
+//		SwingUtils.bindBidirectional(playCaptureButton, playProperty);
 	}
 
 	@Override
