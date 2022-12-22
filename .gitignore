@@ -20,4 +20,4 @@ integration
 **/build
 **/deploy
 **/jdk
-
+*.log

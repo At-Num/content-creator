@@ -20,17 +20,16 @@ package atnum.content.presenter.swing.view;
 
 import java.awt.Container;
 
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JPanel;
-import javax.swing.JToggleButton;
+import javax.swing.*;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 
 import atnum.content.core.audio.device.AudioDevice;
 import atnum.content.core.beans.BooleanProperty;
 import atnum.content.core.beans.StringProperty;
+import atnum.content.core.bus.ApplicationBus;
+import atnum.content.core.bus.event.RecordFileNameEvent;
+import atnum.content.core.bus.event.WindowResizeBoundsEvent;
 import atnum.content.core.view.Action;
 import atnum.content.core.view.ConsumerAction;
 import atnum.content.presenter.api.view.StartRecordingView;
@@ -43,19 +42,13 @@ public class SwingStartRecordingView extends JPanel implements StartRecordingVie
 
 	private ConsumerAction<Boolean> viewVisibleAction;
 
-	private Container contentContainer;
-
 	private JComboBox<String> audioCaptureDevicesCombo;
-
-	private JComboBox<String> audioPlaybackDevicesCombo;
-
-	private JToggleButton testCaptureButton;
-
-	private JToggleButton playCaptureButton;
 
 	private JButton closeButton;
 
 	private JButton startButton;
+
+	public JTextField nameTextField;
 
 
 	SwingStartRecordingView() {
@@ -85,63 +78,26 @@ public class SwingStartRecordingView extends JPanel implements StartRecordingVie
 
 	@Override
 	public void setAudioPlaybackDevice(StringProperty playbackDeviceName) {
-//		SwingUtils.invoke(() -> {
-//			SwingUtils.bindBidirectional(audioPlaybackDevicesCombo, playbackDeviceName);
-//		});
 	}
 
 	@Override
 	public void setAudioPlaybackDevices(AudioDevice[] playbackDevices) {
-//		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
-//
-//		for (AudioDevice device : playbackDevices) {
-//			model.addElement(device.getName());
-//		}
-
-//		SwingUtils.invoke(() -> {
-//			audioPlaybackDevicesCombo.setLightWeightPopupEnabled(false);
-//			audioPlaybackDevicesCombo.setModel(model);
-//		});
 	}
 
 	@Override
 	public void setAudioTestCaptureEnabled(BooleanProperty enable) {
-//		boolean enabled = enable.get();
-//
-//		if (!enabled) {
-//			SwingUtils.invoke(() -> {
-//				testCaptureButton.setSelected(false);
-//				testCaptureButton.setEnabled(false);
-//			});
-//		}
-//
-//		enable.addListener((observable, oldValue, newValue) ->
-//				testCaptureButton.setEnabled(newValue));
 	}
 
 	@Override
 	public void setAudioTestPlaybackEnabled(BooleanProperty enable) {
-//		boolean enabled = enable.get();
-//
-//		if (!enabled) {
-//			SwingUtils.invoke(() -> {
-//				playCaptureButton.setSelected(false);
-//				playCaptureButton.setEnabled(false);
-//			});
-//		}
-//
-//		enable.addListener((observable, oldValue, newValue) ->
-//				playCaptureButton.setEnabled(newValue));
 	}
 
 	@Override
 	public void setOnAudioTestCapture(BooleanProperty recordProperty) {
-//		SwingUtils.bindBidirectional(testCaptureButton, recordProperty);
 	}
 
 	@Override
 	public void setOnAudioTestCapturePlayback(BooleanProperty playProperty) {
-//		SwingUtils.bindBidirectional(playCaptureButton, playProperty);
 	}
 
 	@Override
@@ -157,6 +113,11 @@ public class SwingStartRecordingView extends JPanel implements StartRecordingVie
 	@Override
 	public void setOnViewVisible(ConsumerAction<Boolean> action) {
 		this.viewVisibleAction = action;
+	}
+
+	@Override
+	public String getRecordingName() {
+		return nameTextField.getText();
 	}
 
 	@ViewPostConstruct

@@ -30,6 +30,7 @@ import java.util.concurrent.CompletionException;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import atnum.content.core.bus.event.RecordFileNameEvent;
 import atnum.content.presenter.api.recording.LectureScreenRecorder;
 import com.google.common.eventbus.Subscribe;
 import org.apache.logging.log4j.LogManager;
@@ -68,6 +69,13 @@ public class RecordingService extends ExecutableBase {
 		LOG.debug("onEvent WindowBootBoundsEvent getHeight {} ", event.getBounds().getBounds().getHeight() );
 		screenRecorder.setRecorderBounds(bounds);
 	}
+
+	public void onFileNameUpdate( String fileName ) {
+		System.out.println("RecordingService onFileNameUpdate "+fileName);
+		LOG.debug("RecordingService onFileNameUpdate fileName {} ", fileName );
+		screenRecorder.setFileName(fileName);
+	}
+
 
 	public void setAudioFormat(AudioFormat audioFormat) {
 		screenRecorder.setAudioFormat(audioFormat);
