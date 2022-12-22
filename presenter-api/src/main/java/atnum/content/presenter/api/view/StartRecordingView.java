@@ -49,4 +49,6 @@ public interface StartRecordingView extends View {
 
 	void setOnViewVisible(ConsumerAction<Boolean> action);
 
+	String getRecordingName();
+
 }

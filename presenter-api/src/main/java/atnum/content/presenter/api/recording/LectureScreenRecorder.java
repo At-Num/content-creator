@@ -51,7 +51,7 @@ public class  LectureScreenRecorder  extends LectureRecorder {
     private Rectangle bounds;
 
     private ScreenRecorder screenRecorder;
-
+    private String fileName;
 
 
     public LectureScreenRecorder(AudioSystemProvider audioSystemProvider, ApplicationContext context, String recDir) {
@@ -85,7 +85,7 @@ public class  LectureScreenRecorder  extends LectureRecorder {
                     new Format(MediaTypeKey, MediaType.AUDIO,
                     SampleRateKey, Rational.valueOf(44100),
                     SampleSizeInBitsKey,  16,
-                    ChannelsKey, 2), new File(this.recDir), "presentation" );
+                    ChannelsKey, 2), new File(this.recDir), fileName );
         } catch (IOException | AWTException e) {
             throw new RuntimeException(e);
         }
@@ -158,5 +158,9 @@ public class  LectureScreenRecorder  extends LectureRecorder {
 
     public String getBestRecordingName() {
         return "someTimeStamp";
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }

@@ -37,11 +37,16 @@ import atnum.content.core.audio.sink.AudioSink;
 import atnum.content.core.audio.sink.ByteArrayAudioSink;
 import atnum.content.core.audio.source.ByteArrayAudioSource;
 import atnum.content.core.beans.BooleanProperty;
+import atnum.content.core.bus.ApplicationBus;
+import atnum.content.core.bus.EventBus;
+import atnum.content.core.bus.event.RecordFileNameEvent;
 import atnum.content.core.presenter.Presenter;
 import atnum.content.core.view.Action;
 import atnum.content.core.view.ViewLayer;
 import atnum.content.presenter.api.context.PresenterContext;
+import atnum.content.presenter.api.service.RecordingService;
 import atnum.content.presenter.api.view.StartRecordingView;
+import atnum.content.swing.util.SwingUtils;
 
 public class StartRecordingPresenter extends Presenter<StartRecordingView> {
 
@@ -66,12 +71,17 @@ public class StartRecordingPresenter extends Presenter<StartRecordingView> {
 
 	private BooleanProperty playbackEnabled;
 
+	private final EventBus eventBus;
+
+	@Inject
+	private RecordingService recordingService;
+
 
 	@Inject
 	StartRecordingPresenter(PresenterContext context, StartRecordingView view,
 			AudioSystemProvider audioSystemProvider) {
 		super(context, view);
-
+		this.eventBus = context.getEventBus();
 		this.audioSystemProvider = audioSystemProvider;
 		this.audioConfig = context.getConfiguration().getAudioConfig();
 	}
@@ -127,6 +137,7 @@ public class StartRecordingPresenter extends Presenter<StartRecordingView> {
 	}
 
 	private void onStart() {
+		recordingService.onFileNameUpdate(view.getRecordingName().trim());
 		dispose();
 
 		if (nonNull(startAction)) {

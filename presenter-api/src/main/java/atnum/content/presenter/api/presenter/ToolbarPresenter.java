@@ -145,7 +145,6 @@ public class ToolbarPresenter extends Presenter<ToolbarView> {
 		recordNotifyState.setRecordingState(event.getState());
 	}
 
-
 	@Subscribe
 	public void onEvent(final ToolSelectionEvent event) {
 		toolChanged(event.getToolType(), event.getPaintSettings());
