@@ -73,6 +73,7 @@ public class RecordingService extends ExecutableBase {
 	public void onFileNameUpdate( String fileName ) {
 		System.out.println("RecordingService onFileNameUpdate "+fileName);
 		LOG.debug("RecordingService onFileNameUpdate fileName {} ", fileName );
+
 		screenRecorder.setFileName(fileName);
 	}
 
@@ -109,6 +110,7 @@ public class RecordingService extends ExecutableBase {
 
 	@Override
 	protected void startInternal() throws ExecutableException {
+
 		screenRecorder.start();
 
 	}
