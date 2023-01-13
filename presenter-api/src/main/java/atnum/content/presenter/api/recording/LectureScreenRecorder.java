@@ -120,13 +120,9 @@ public class  LectureScreenRecorder  extends LectureRecorder {
     @Override
     protected void startInternal() throws ExecutableException {
         LOG.debug("startInternal " );
+        screenRecorderFactory();
         try {
-            if(nonNull(screenRecorder)) {
-                screenRecorder.start();
-            } else {
-                screenRecorderFactory();
-                screenRecorder.start();
-            }
+            screenRecorder.start();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

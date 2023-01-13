@@ -122,6 +122,7 @@ public class SwingStartRecordingView extends JPanel implements StartRecordingVie
 
 	@ViewPostConstruct
 	private void initialize() {
+		nameTextField.setText("");
 		addAncestorListener(new AncestorListener() {
 
 			@Override
