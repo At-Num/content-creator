@@ -127,6 +127,7 @@ public class SwingStartRecordingView extends JPanel implements StartRecordingVie
 
 			@Override
 			public void ancestorAdded(AncestorEvent event) {
+				nameTextField.requestFocusInWindow();
 				executeAction(viewVisibleAction, true);
 			}
 
